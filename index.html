@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+  <title>Dream Wave &trade;</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300,800' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="DrawSVGPlugin2.js"></script>
+
+  
+  
+<style>
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.right {
+  float: right;
+}
+
+/* ====== MIXINS ===== */
+.poster__subheading, .poster__heading {
+  text-align: center;
+}
+
+.poster__heading {
+  margin: 0 auto;
+}
+
+html {
+  font-family: "Open Sans";
+  font-size: 100%;
+}
+@media screen and (min-width: 31.25em) {
+  html {
+    font-size: 105%;
+  }
+}
+@media screen and (min-width: 50em) {
+  html {
+    font-size: 115%;
+  }
+}
+@media screen and (min-width: 75em) {
+  html {
+    font-size: 125%;
+  }
+}
+
+.btn--comments, .btn--primary {
+  display: inline;
+  text-decoration: none;
+  padding: 0.45em 1.25em;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 0.75rem;
+  border-radius: 25px;
+  color: white;
+  font-family: "Open Sans";
+  transition: all 250ms ease;
+}
+
+.btn--primary {
+  border: 1px solid white;
+}
+.btn--primary:hover {
+  background-color: white;
+  color: black;
+}
+
+.poster {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-image: url("images/space2.jpg");
+}
+.poster__heading {
+  width: 95%;
+  color: white;
+  padding-top: 5.5rem;
+  font-weight: 600;
+  font-size: 2em;
+  transition: all 400ms ease;
+}
+@media screen and (min-width: 31.25em) {
+  .poster__heading {
+    font-size: 2.25em;
+  }
+}
+@media screen and (min-width: 50em) {
+  .poster__heading {
+    font-size: 2.75em;
+  }
+}
+.poster__subheading {
+  display: block;
+  font-size: 0.3em;
+  letter-spacing: 5px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #FF9639;
+  padding-top: 0.8em;
+  margin-bottom: 0.6em;
+}
+
+.btn--comments {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  font-size: 0.6em;
+}
+.btn--comments:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.timeline-wrapper {
+  position: relative;
+  padding-bottom: 25em;
+  background: linear-gradient(#000 10%, #283048 60%, #55679a 70%, rgba(255, 255, 255, 0));
+}
+.timeline-wrapper:after {
+  content: "";
+  display: block;
+  background-image: url("http://codepen.vincebrown.me/assets/images/white-mountains.jpg");
+  height: 500px;
+  width: 100%;
+  background-size: cover;
+  position: absolute;
+  background-position: 25% center;
+  z-index: -10;
+  bottom: 0;
+}
+
+.svg-timeline {
+  position: absolute;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+@media screen and (min-width: 50em) {
+  .svg-timeline {
+    display: block;
+  }
+}
+
+.timeline {
+  transition: all 250ms ease;
+  width: 90%;
+  margin: 0 auto;
+}
+@media screen and (min-width: 31.25em) {
+  .timeline {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 50em) {
+  .timeline {
+    width: 95%;
+  }
+}
+.timeline__item {
+  margin-bottom: 4em;
+  clear: both;
+}
+@media screen and (min-width: 50em) {
+  .timeline__item {
+    width: 40%;
+  }
+}
+.timeline__day {
+  font-weight: 600;
+  font-size: 0.9em;
+  color: white;
+  text-transform: uppercase;
+  padding-bottom: 0.75em;
+}
+.timeline__day span {
+  font-weight: 300;
+  color: orange;
+  text-transform: none;
+}
+.timeline__day-sum {
+  color: white;
+  font-weight: 300;
+  font-size: 0.8em;
+  display: block;
+  margin-bottom: 1.5em;
+  line-height: 1.5;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+/* start commented backslash hack \*/
+* html .clearfix {
+  height: 1%;
+}
+
+.clearfix {
+  display: block;
+}
+
+/* close commented backslash hack */
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+  <html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DREAM WAVE&TRADE;</title>
+  <meta name="viewport" content="width=device-width">
+  
+</head>
+
+<body>
+  <header>
+    <div class="poster">
+      <h1 class="poster__heading">Dream Wave &trade; 
+          <span class="poster__subheading">The Ultimate Vibe</span>
+         <a href="https://dreamhive.org" class="btn--primary">Join the Hive</a>
+      </div>
+    </div>
+  </header>
+  <main class="timeline-wrapper">
+    <div class="svg-timeline">
+      <svg width="8px" height="1490.7px" viewBox="0 0 8 1490.7">
+        <line id="timeline" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" x1="4" y1="0" x2="4" y2="1490.7"/>
+      </svg>
+    </div>
+    <ol class="timeline clearfix">
+      <li class="timeline__item">
+        <h3 class="timeline__day">1: <span>Ignite Curiosity</span></h3>
+        <p class="timeline__day-sum">Adventures in new interests and amazement of life’s opportunities.</p>
+        <a href="https://curiosityhive.org" class="btn--comments">Curiosity Hive</a>
+      </li>
+      <li class="timeline__item right">
+        <h3 class="timeline__day dayTwo">2: <span>Expression</span></h3>
+        <p class="timeline__day-sum">Building habits of artistic expression and Creating Abundance</p>
+        <a href="https://designhive.org" class="btn--comments">Design Hive</a>
+      </li>
+      <li class="timeline__item">
+        <h3 class="timeline__day dayThree">3: <span>Empowerment</span></h3>
+        <p class="timeline__day-sum">Routines and advice for those seeking advancement in their confidence and presence.</p>
+        <a href="https://firehive.org" class="btn--comments">Fire Hive</a>
+      </li>
+      <li class="timeline__item right">
+        <h3 class="timeline__day dayFour">Day 7: <span>90&deg; North</span></h3>
+        <p class="timeline__day-sum">All of the anticipation of the past few days reaches a climax as you reach the North Pole! Many travelers find themselves overcome with emotion, while others are in a festive mood. Take photos, wave a flag, enjoy your moment! Later, everyone enjoys a champagne toast and a BBQ on the ice. Add an exclamation to your success by rising high in one of our hot air balloons to commemerate this great moment.</p>
+        <a href="#" class="btn--comments">132 Comments</a>
+      </li>
+      <li class="timeline__item">
+        <h3 class="timeline__day dayFive">Day 8: <span>Southbound in the Arctic Ocean</span></h3>
+        <p class="timeline__day-sum">Now you can sit back and relax, everything from here on out is a bonus! Expect more great memories as you head south, you may get lucky and spot a Polar Bear hunting a Seal.</p>
+        <a href="#" class="btn--comments">2 Comments</a>
+      </li>
+      <li class="timeline__item right">
+        <h3 class="timeline__day daySix">Day 9-10: <span>Franz Josef Land</span></h3>
+        <p class="timeline__day-sum">Now you can sit back and relax, everything from here on out is a bonus! Expect more great memories as you head south, you may get lucky and spot a Polar Bear hunting a Seal.</p>
+        <a href="#" class="btn--comments">12 Comments</a>
+      </li>
+    </ol>
+  </main>
+</body>
+</html>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.14.2/TweenMax.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.3/ScrollMagic.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.3/plugins/animation.gsap.js'></script>
+<script src='DrawSVGPlugin.js'></script>
+      <script id="rendered-js" >
+var controller = new ScrollMagic.Controller();
+TweenMax.set('#timeline', { visibility: 0 });
+
+var tweenOne =
+new TweenMax.fromTo('#timeline', 1, { drawSVG: "0%" }, { drawSVG: "10%" });
+
+var scene1 = new ScrollMagic.Scene({
+  triggerElement: '#timeline' }).
+setTween(tweenOne).addTo(controller);
+
+var tweenTwo =
+new TweenMax.fromTo('#timeline', 1, { drawSVG: "10%" }, { drawSVG: "20%" });
+
+var scene2 = new ScrollMagic.Scene({
+  triggerElement: '.dayTwo' }).
+setTween(tweenTwo).addTo(controller);
+
+
+var tweenThree =
+new TweenMax.fromTo('#timeline', 1, { drawSVG: "20%" }, { drawSVG: "40%" });
+
+var scene3 = new ScrollMagic.Scene({
+  triggerElement: '.dayThree' }).
+setTween(tweenThree).addTo(controller);
+
+
+var tweenFour =
+new TweenMax.fromTo('#timeline', 1, { drawSVG: "40%" }, { drawSVG: "65%" });
+
+var scene3 = new ScrollMagic.Scene({
+  triggerElement: '.dayFour' }).
+setTween(tweenFour).addTo(controller);
+
+var tweenFive =
+new TweenMax.fromTo('#timeline', 1, { drawSVG: "65%" }, { drawSVG: "85%" });
+
+var scene3 = new ScrollMagic.Scene({
+  triggerElement: '.dayFive' }).
+setTween(tweenFive).addTo(controller);
+
+var tweenSix =
+new TweenMax.fromTo('#timeline', 1, { drawSVG: "85%" }, { drawSVG: "102%" });
+
+var scene3 = new ScrollMagic.Scene({
+  triggerElement: '.daySix' }).
+setTween(tweenSix).addTo(controller);
+//# sourceURL=pen.js
+    </script>
+
+  
+
+</body>
+
+</html>
+ 
